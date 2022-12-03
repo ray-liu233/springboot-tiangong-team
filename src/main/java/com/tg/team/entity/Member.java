@@ -8,27 +8,38 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name="member_name")
     private String name;
     @Column(name="member_type")
     private String memberType;
 
-    @OneToMany(targetEntity = Story.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Story> stories;
+    @Column(name="story_id")
+    private Long storyId;
 
-    public void addStory(Story story){stories.add(story);}
 
-    public Member(long id, String name, String memberType) {
-        this.id = id;
+    public Member(String name, String memberType, Long storyId) {
         this.name = name;
         this.memberType = memberType;
+        this.storyId = storyId;
     }
 
     public Member() {
     }
 
-    public long getId() {
+    public Long getStoryId() {
+        return storyId;
+    }
+
+    public void setStoryId(Long storyId) {
+        this.storyId = storyId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -38,10 +49,6 @@ public class Member {
 
     public String getMemberType() {
         return memberType;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setName(String name) {
