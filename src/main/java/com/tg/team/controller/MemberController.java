@@ -4,11 +4,8 @@ import com.tg.team.dto.AddMemberRequest;
 import com.tg.team.entity.Member;
 import com.tg.team.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -18,6 +15,7 @@ public class MemberController {
     private MemberService memberService;
 
     @PostMapping(path = "/members/addition")
+    @ResponseStatus(value= HttpStatus.CREATED)
     public void addMembers(@RequestBody AddMemberRequest request){
          memberService.addMembers(request);
     }
@@ -26,7 +24,6 @@ public class MemberController {
     public List<Member> getAllMembers(){
         return memberService.findMembers();
     }
-
 
 
 }
