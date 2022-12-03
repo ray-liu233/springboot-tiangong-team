@@ -4,7 +4,7 @@ public enum StoryType {
     NEW("NEW"),
     ASSIGNED("ASSIGNED"),
     DONE("DONE"),
-    deleted("deleted");
+    DELETED("DELETED");
 
     private final String typeName;
 
