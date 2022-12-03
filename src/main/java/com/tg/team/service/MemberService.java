@@ -14,10 +14,16 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     public void addMembers(AddMemberRequest request){
-        memberRepository.save(new Member(request.getId(),request.getName(),request.getMemberType()));
+        memberRepository.save(new Member(request.getName(),request.getMemberType(), request.getStoryId()));
     }
 
     public List<Member> findMembers(){
         return memberRepository.findAll();
     }
+
 }
+
+
+
+
+
