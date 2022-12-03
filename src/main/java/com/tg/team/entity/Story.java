@@ -3,36 +3,36 @@ package com.tg.team.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "storys")
+@Table(name = "stories")
 public class Story {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
 
     @Column(name="story_type")
     private String storyType;
 
-    public Story(long id, String storyType) {
-        this.id = id;
+    public Story( String storyType) {
         this.storyType = storyType;
     }
 
     public Story() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getStoryType() {
-        return storyType;
-    }
-
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setStoryType(String storyType) {
         this.storyType = storyType;
+    }
+
+    public String getStoryType() {
+        return storyType;
     }
 }
