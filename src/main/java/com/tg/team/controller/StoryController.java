@@ -14,28 +14,28 @@ public class StoryController {
     @Autowired
     private StoryService storyService;
 
-    @PostMapping(path = "/story/addition/ba")
+    @PostMapping(path = "/POST/stories/ba")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void baAddStores(){
-        storyService.baAddStories();
+    public List<Story> baAddStores(){
+      return storyService.baAddStories();
     }
 
-    @PostMapping(path = "/story/addition/normal")
+    @PostMapping(path = "/POST/stories/normal")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void addStories(@RequestBody AddStoryRequest addStoryRequest){
-        storyService.addStories(addStoryRequest);
+    public Story addStories(@RequestBody AddStoryRequest addStoryRequest){
+        return storyService.addStories(addStoryRequest);
     }
 
-    @GetMapping(path="/stories/get")
+    @GetMapping(path="/GET/stories")
     public List<Story> getAllStories(){return storyService.findStories();}
 
-    @PostMapping(path = "/stories/assigned/dev")
+    @PostMapping(path = "/POST/stories/assignment/dev")
     public  String  devAssignedStories(){return storyService.assignedStories();}
 
-    @PostMapping(path="/stories/done/dev")
+    @PostMapping(path="/POST/stories/done/dev")
     public  void  devDoneStories(){storyService.devDoneStories();}
 
-    @DeleteMapping (path="/stories/delete/qa")
+    @DeleteMapping (path="/DELETE/stories/qa")
     public  void  qaDeleteStories(){storyService.qaDeleteStories();}
 
 }
