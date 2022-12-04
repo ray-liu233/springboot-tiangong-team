@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -18,21 +19,27 @@ import java.util.stream.Collectors;
 public class StoryService {
     Random random=new Random();
 
+    public StoryService(StoryRepository storyRepository) {
+        this.storyRepository = storyRepository;
+    }
+
     @Autowired
     private StoryRepository storyRepository;
 
     @Autowired
     private MemberRepository memberRepository;
 
-    public void baAddStories() {
+    public List<Story> baAddStories() {
+        List<Story> stories=new ArrayList<>();
         int count = random.nextInt(3) + 1;
         for (int i = 0; i < count; i++) {
-            storyRepository.save(new Story("NEW"));
+           stories.add(storyRepository.save(new Story("NEW")));
         }
+        return stories;
     }
 
-    public void addStories(AddStoryRequest addStoryRequest) {
-        storyRepository.save(new Story(addStoryRequest.getStoryType()));
+    public Story addStories(AddStoryRequest addStoryRequest) {
+       return storyRepository.save(new Story(addStoryRequest.getStoryType()));
     }
 
     public List<Story> findStories(){return storyRepository.findAll();}
