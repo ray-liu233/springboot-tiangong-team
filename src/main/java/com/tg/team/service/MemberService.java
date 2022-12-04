@@ -13,8 +13,12 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void addMembers(AddMemberRequest request){
-        memberRepository.save(new Member(request.getName(),request.getMemberType(), request.getStoryId()));
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository=memberRepository;
+    }
+
+    public Member addMembers(AddMemberRequest request){
+      return  memberRepository.save(new Member(request.getName(),request.getMemberType(), request.getStoryId()));
     }
 
     public List<Member> findMembers(){
