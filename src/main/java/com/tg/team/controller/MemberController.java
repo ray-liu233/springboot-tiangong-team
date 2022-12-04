@@ -14,13 +14,13 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @PostMapping(path = "/members/addition")
+    @PostMapping(path = "/POST/members")
     @ResponseStatus(value= HttpStatus.CREATED)
-    public void addMembers(@RequestBody AddMemberRequest request){
-         memberService.addMembers(request);
+    public Member addMembers(@RequestBody AddMemberRequest request){
+        return memberService.addMembers(request);
     }
 
-    @GetMapping(path ="/members/get")
+    @GetMapping(path ="/GET/members")
     public List<Member> getAllMembers(){
         return memberService.findMembers();
     }
