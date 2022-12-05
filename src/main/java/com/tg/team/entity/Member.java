@@ -24,6 +24,11 @@ public class Member {
         this.storyId = storyId;
     }
 
+    public Member(String name,String memberType){
+        this.name = name;
+        this.memberType = memberType;
+    }
+
     public Member() {
     }
 
