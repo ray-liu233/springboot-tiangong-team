@@ -33,9 +33,9 @@ public class StoryService {
         List<Story> stories=new ArrayList<>();
         int count = random.nextInt(3) + 1;
         for (int i = 0; i < count; i++) {
-           stories.add(storyRepository.save(new Story("NEW")));
+           stories.add(new Story("new"));
         }
-        return stories;
+        return storyRepository.saveAll(stories);
     }
 
     public Story addStories(AddStoryRequest addStoryRequest) {
@@ -45,7 +45,7 @@ public class StoryService {
     public List<Story> findStories(){return storyRepository.findAll();}
 
 
-    public  String  assignedStories() {
+    public  List<Story>  assignedStories() {
         List<Member> filteredMember = memberRepository.findAll().stream()
                 .filter(member -> member.getMemberType().equals("DEV"))
                 .filter(member -> String.valueOf(member.getStoryId()).equals("null"))
@@ -63,39 +63,43 @@ public class StoryService {
                 filteredStories.get(i).setStoryType("ASSIGNED");
             }
             memberRepository.saveAll(filteredMember);
-            storyRepository.saveAll(filteredStories);
-            return "ALL VACANT DEVS ARE ASSIGNED ";
+            return  storyRepository.saveAll(filteredStories);
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"There is no vacant DEV");
     }
-    public void devDoneStories() {
+    public List<Story> devDoneStories() {
         List<Member> filteredMember=memberRepository.findAll().stream()
                                     .filter(member -> member.getMemberType().equals("DEV"))
                                     .filter(member -> String.valueOf(member.getStoryId())!=null)
                                     .collect(Collectors.toList());
 
-        List<Story> filteredStories=storyRepository.findAll().stream()
-                .filter(story ->story.getStoryType().equals("ASSIGNED"))
-                .collect(Collectors.toList());
+//        for (int i = 0; i < filteredMember.size() ; i++) {
+//            Long id=filteredMember.get(i).getStoryId();
+//            Optional<Story> story=storyRepository.findById(id);
+//            story.get().setStoryType("DONE");
+//            filteredMember.get(i).setStoryId(null);
+//        }
 
+        List<Story> filteredStories = storyRepository.findAll().stream()
+                .filter(story -> story.getStoryType().equals("ASSIGNED"))
+                .collect(Collectors.toList());
         for (int i = 0; i <filteredStories.size() ; i++) {
             filteredMember.get(i).setStoryId(null);
             filteredStories.get(i).setStoryType("DONE");
         }
         memberRepository.saveAll(filteredMember);
-        storyRepository.saveAll(filteredStories);
+        return storyRepository.saveAll(filteredStories);
      }
 
-    public void qaDeleteStories() {
+    public List<Story> qaDeleteStories() {
         List<Story> filteredStories=storyRepository.findAll().stream()
                 .filter(story ->story.getStoryType().equals("DONE"))
                 .collect(Collectors.toList());
-
-        for (Story story:filteredStories
-             ) {
-            story.setStoryType("DELETED");
+        int minSize=Math.min(2,filteredStories.size());
+        for (int i = 0; i < minSize ; i++) {
+            filteredStories.get(i).setStoryType("DELETED");
         }
-        storyRepository.saveAll(filteredStories);
+        return  storyRepository.saveAll(filteredStories);
     }
 }
 
