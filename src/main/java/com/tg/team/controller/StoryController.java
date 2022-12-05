@@ -30,12 +30,12 @@ public class StoryController {
     public List<Story> getAllStories(){return storyService.findStories();}
 
     @PostMapping(path = "/POST/stories/assignment/dev")
-    public  String  devAssignedStories(){return storyService.assignedStories();}
+    public  List<Story>  devAssignedStories(){return storyService.assignedStories();}
 
     @PostMapping(path="/POST/stories/done/dev")
-    public  void  devDoneStories(){storyService.devDoneStories();}
+    public  List<Story>  devDoneStories(){return storyService.devDoneStories();}
 
     @DeleteMapping (path="/DELETE/stories/qa")
-    public  void  qaDeleteStories(){storyService.qaDeleteStories();}
+    public  List<Story>  qaDeleteStories(){return  storyService.qaDeleteStories();}
 
 }
