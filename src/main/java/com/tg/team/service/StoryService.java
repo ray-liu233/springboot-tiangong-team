@@ -73,13 +73,6 @@ public class StoryService {
                                     .filter(member -> String.valueOf(member.getStoryId())!=null)
                                     .collect(Collectors.toList());
 
-//        for (int i = 0; i < filteredMember.size() ; i++) {
-//            Long id=filteredMember.get(i).getStoryId();
-//            Optional<Story> story=storyRepository.findById(id);
-//            story.get().setStoryType("DONE");
-//            filteredMember.get(i).setStoryId(null);
-//        }
-
         List<Story> filteredStories = storyRepository.findAll().stream()
                 .filter(story -> story.getStoryType().equals("ASSIGNED"))
                 .collect(Collectors.toList());
