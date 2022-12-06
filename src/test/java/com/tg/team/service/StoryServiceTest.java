@@ -28,14 +28,14 @@ class StoryServiceTest {
     private  StoryService storyService;
     Story story=new Story("NEW");
     @Test
-    public void should_return_member_when_add_stories(){
+    public void should_return_story_when_add_stories(){
         when(storyRepository.save(any(Story.class))).thenReturn(story);
         Story story1=storyService.addStories(new AddStoryRequest(story.getStoryType()));
         assertThat(story1.getStoryType()).isEqualTo("NEW");
     }
 
     @Test
-    public void should_return_members_when_get_stories(){
+    public void should_return_stories_when_get_stories(){
         List<Story> stories=new ArrayList<>();
         stories.add(story);
         when(storyRepository.findAll()).thenReturn(stories);
@@ -43,7 +43,7 @@ class StoryServiceTest {
     }
 
     @Test
-    public void should_return_members_when_BA_add_stories(){
+    public void should_return_stories_when_BA_add_stories(){
         List<Story> stories=new ArrayList<>();
         stories.add(new Story("NEW"));
         when(storyRepository.saveAll(any())).thenReturn(stories);
@@ -101,7 +101,7 @@ class StoryServiceTest {
          when(storyRepository.saveAll(any())).thenReturn(stories);
          when(storyRepository.findAll()).thenReturn(stories);
 
-         List<Story> stories1=storyService.qaDeleteStories();
+         List<Story> stories1=storyService.deleteStories();
 
          Assertions.assertEquals("DELETED",stories1.get(0).getStoryType());
          Assertions.assertEquals("DELETED",stories1.get(1).getStoryType());
