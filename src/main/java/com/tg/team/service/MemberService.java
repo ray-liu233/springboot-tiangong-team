@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class MemberService {
@@ -19,7 +18,7 @@ public class MemberService {
     }
 
     public Member addMembers(AddMemberRequest request){
-      System.out.println(Objects.nonNull(request));
+//      System.out.println(Objects.nonNull(request));
       return  memberRepository.save(new Member(request.getName(),request.getMemberType()));
     }
 
