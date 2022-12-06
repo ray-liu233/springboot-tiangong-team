@@ -76,6 +76,7 @@ public class StoryService {
         List<Story> filteredStories = storyRepository.findAll().stream()
                 .filter(story -> story.getStoryType().equals("ASSIGNED"))
                 .collect(Collectors.toList());
+
         for (int i = 0; i <filteredStories.size() ; i++) {
             filteredMember.get(i).setStoryId(null);
             filteredStories.get(i).setStoryType("DONE");
@@ -84,11 +85,13 @@ public class StoryService {
         return storyRepository.saveAll(filteredStories);
      }
 
-    public List<Story> qaDeleteStories() {
+    public List<Story> deleteStories() {
         List<Story> filteredStories=storyRepository.findAll().stream()
                 .filter(story ->story.getStoryType().equals("DONE"))
                 .collect(Collectors.toList());
+
         int minSize=Math.min(2,filteredStories.size());
+
         for (int i = 0; i < minSize ; i++) {
             filteredStories.get(i).setStoryType("DELETED");
         }
