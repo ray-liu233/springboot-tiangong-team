@@ -33,7 +33,7 @@ public class StoryService {
         List<Story> stories=new ArrayList<>();
         int count = random.nextInt(3) + 1;
         for (int i = 0; i < count; i++) {
-           stories.add(new Story("new"));
+           stories.add(new Story("NEW"));
         }
         return storyRepository.saveAll(stories);
     }
