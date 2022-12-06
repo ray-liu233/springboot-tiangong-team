@@ -94,7 +94,7 @@ class StoryControllerTest {
         Story story1=new Story("DELETED");
         List<Story> stories=new ArrayList<>();
         stories.add(story1);
-        when(storyService.qaDeleteStories()).thenReturn(stories);
+        when(storyService.deleteStories()).thenReturn(stories);
         mockMvc.perform(MockMvcRequestBuilders.delete("/DELETE/stories/qa")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
