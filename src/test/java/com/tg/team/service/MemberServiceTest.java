@@ -28,6 +28,7 @@ class MemberServiceTest {
         when(memberRepository.save(any(Member.class))).thenReturn(member);
         AddMemberRequest addMemberRequest=new AddMemberRequest(member.getName(),member.getMemberType());
         Member member1= memberService.addMembers(addMemberRequest);
+
         assertThat(member1.getName()).isEqualTo("小芳");
         assertThat(member1.getMemberType()).isEqualTo("DEV");
     }
