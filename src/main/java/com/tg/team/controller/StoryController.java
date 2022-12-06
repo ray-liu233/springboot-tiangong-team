@@ -36,6 +36,6 @@ public class StoryController {
     public  List<Story>  devDoneStories(){return storyService.devDoneStories();}
 
     @DeleteMapping (path="/DELETE/stories/qa")
-    public  List<Story>  qaDeleteStories(){return  storyService.qaDeleteStories();}
+    public  List<Story>  qaDeleteStories(){return  storyService.deleteStories();}
 
 }
