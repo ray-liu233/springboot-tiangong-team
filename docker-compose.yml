@@ -1,0 +1,24 @@
+version: '3'
+services:
+  spring-server:
+     build: .
+     image: spring-server:1.0
+     container_name: spring-server
+     ports:
+     - '8081:8081'
+     depends_on:
+       - postgres
+     environment:
+       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/team
+       - SPRING_DATASOURCE_USERNAME=wenrui.liu
+       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: 'team'
+      POSTGRES_USER: 'wenrui.liu'
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - '5432:5432'
